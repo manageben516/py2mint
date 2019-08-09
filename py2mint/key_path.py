@@ -13,7 +13,7 @@ def trans_generator_output(trans):
 
     return decorator
 
-
+ 
 class NoDefault:
     pass
 
