@@ -21,7 +21,6 @@ class CondNode(RoutingNode):
     def __iter__(self):
         yield from self.then
 
-
 @attr.s
 class FinalNode(RoutingNode):
     val = attr.ib()
