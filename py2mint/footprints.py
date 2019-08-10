@@ -166,8 +166,6 @@ class Tracker:
         """
         if key in ['start_track', 'attr_used', 'on_access', 'attrs_to_ignore'] or key in self.attrs_to_ignore:
             return
-        if key in ['x', 'y']:
-            print(key)
         if self.start_track:
             self.attr_used.append(key)
 
@@ -204,7 +202,7 @@ def attrs_used_by_method_computation(cls_method, init_kwargs=None, method_kwargs
         if isinstance(cls_method, property):
             candidate_method = cls_method.fget
             with start_tracking(tracker):
-                candidate_method(method_class)
+                candidate_method(tracker)
         else:
             candidate_method = getattr(tracker, method_name)
             with start_tracking(tracker):

@@ -87,10 +87,10 @@ def test_attrs_used_by_method():
     assert attrs_used_by_method(A.a_class_method) == {'e'}
 
     assert attrs_used_by_method(B.greet) == {'a', 'x', 'y'}
-    # assert attrs_used_by_method(B.z) == {'x', 'y'}
-    # assert attrs_used_by_method(B.accessing_property_method) == {'b', 'z', 'x', 'y'}  # perhaps z should not be here?
+    assert attrs_used_by_method(B.z) == {'x', 'y'}
+    assert attrs_used_by_method(B.accessing_property_method) == {'b', 'z', 'x', 'y'}  # perhaps z should not be here?
     assert attrs_used_by_method(B.with_f_string) == {'greeting', 'x'}
-    # assert attrs_used_by_method(B.writing_to_an_attribute) == {'x', 'a'}
+    assert attrs_used_by_method(B.writing_to_an_attribute) == {'x', 'a'}
 
 
 def test_attrs_used_by_method_computation():
