@@ -96,18 +96,18 @@ def test_attrs_used_by_method():
 def test_attrs_used_by_method_computation():
     from py2mint.footprints import attrs_used_by_method_computation
 
-    assert attrs_used_by_method_computation(A.target_method, {}, {'x': 3}) == {'a', 'b', 'c', 'e'}
-    assert attrs_used_by_method_computation(A.other_method, {}) == {'c', 'e'}
+    # assert attrs_used_by_method_computation(A.target_method, {}, {'x': 3}) == {'a', 'b', 'c', 'e'}
+    # assert attrs_used_by_method_computation(A.other_method, {}) == {'c', 'e'}
     # assert attrs_used_by_method_computation(A.a_class_method, {}, {'y': 3}) == {'e'}  # fails (returns {})
 
     init_kws = dict(a=100)
-    assert attrs_used_by_method_computation(B.greet, init_kws) == {'a', 'x', 'y'}
-    # assert attrs_used_by_method_computation(B.z, init_kws) == {'x', 'y'}  # fails (property z has no __name__)
-    assert attrs_used_by_method_computation(
-        B.accessing_property_method, init_kws) == {'b', 'z', 'x', 'y'}  # z or not z?
-    assert attrs_used_by_method_computation(B.with_f_string, init_kws) == {'greeting', 'x'}
-    assert attrs_used_by_method_computation(
-        B.writing_to_an_attribute, init_kws, dict(x_val=0, a_val=1)) == {'x', 'a'}
+    # assert attrs_used_by_method_computation(B.greet, init_kws) == {'a', 'x', 'y'}
+    assert attrs_used_by_method_computation(B.z, init_kws) == {'x', 'y'}  # fails (property z has no __name__)
+    # assert attrs_used_by_method_computation(
+    #     B.accessing_property_method, init_kws) == {'b', 'z', 'x', 'y'}  # z or not z?
+    # assert attrs_used_by_method_computation(B.with_f_string, init_kws) == {'greeting', 'x'}
+    # assert attrs_used_by_method_computation(
+    #     B.writing_to_an_attribute, init_kws, dict(x_val=0, a_val=1)) == {'x', 'a'}
 
 
 ## Order conserving
@@ -140,3 +140,7 @@ def test_attrs_used_by_method_computation():
 #     assert attrs_used_by_method_computation(B.with_f_string, init_kws) == ['greeting', 'x']
 #     assert attrs_used_by_method_computation(
 #         B.writing_to_an_attribute, init_kws, dict(x_val=0, y_val=1)) == ['x', 'a']
+
+
+if __name__ == '__main__':
+    test_attrs_used_by_method_computation()
