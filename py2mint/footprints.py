@@ -199,13 +199,12 @@ def attrs_used_by_method_computation(cls_method, init_kwargs=None, method_kwargs
 
     if hasattr(tracker, method_name):
         # Now, we want to track attributes.
-        if isinstance(cls_method, property):
-            candidate_method = cls_method.fget
-            with start_tracking(tracker):
+        with start_tracking(tracker):
+            if isinstance(cls_method, property):
+                candidate_method = cls_method.fget
                 candidate_method(tracker)
-        else:
-            candidate_method = getattr(tracker, method_name)
-            with start_tracking(tracker):
+            else:
+                candidate_method = getattr(tracker, method_name)
                 candidate_method(**method_kwargs)
 
         return _process_duplicates(tracker.attr_used, remove_duplicates=remove_duplicates)
